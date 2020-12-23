@@ -20,6 +20,7 @@ int main(){
 			cin >> pass;
 		}
 		admin();
-
+		
 	}
+	
 }

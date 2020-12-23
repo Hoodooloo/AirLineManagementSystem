@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
 #include <cstdio>
+#include <sstream>
 #include <vector>
+#include <fstream>
 using namespace std;
 class Flight{
-	int fl_number[4];
+	int fl_number;
 	std::string fl_ori;
 	std::string fl_des;
 	int dtime;
@@ -13,35 +15,89 @@ class Flight{
 	int sprice;
 public:
 	void getdata();
-	void display();
-	void deleteflight(){
-		printf("Bye World\n");
+	void display(){
+		printf("Hello\n");
 	};
+	void deleteflight();
 };
 
 void Flight::getdata(){
-		printf("Enter the Flight Number: \n");
-		int fl_number;
-		std::cin >> fl_number;
-		printf("Enter the flight origin: \n");
-		std::string fl_ori;
-		std::cin >> fl_ori;
-		printf("Enter the flight destination: \n");
-		std::string fl_des;
-		std::cin >> fl_des;
-		printf("Enter the flight departure time: \n");
-		int dtime;
-		std::cin >> dtime;
-		printf("Enter the flight arrival time: \n");
-		int atime;
-		std::cin >> atime;
-		printf("Enter the total seats: \n");
-		int total_seat;
-		std::cin >> total_seat;
-		printf("Enter the price of each seat: \n");
-		int sprice;
-		std::cin >> sprice;
+	printf("Enter the Flight Number: \n");
+	int fl_number;
+	std::cin >> fl_number;
+	printf("Enter the flight origin: \n");
+	std::string fl_ori;
+	std::cin >> fl_ori;
+	printf("Enter the flight destination: \n");
+	std::string fl_des;
+	std::cin >> fl_des;
+	printf("Enter the flight departure time: \n");
+	int dtime;
+	std::cin >> dtime;
+	printf("Enter the flight arrival time: \n");
+	int atime;
+	std::cin >> atime;
+	printf("Enter the total seats: \n");
+	int total_seat;
+	std::cin >> total_seat;
+	printf("Enter the price of each seat: \n");
+	int sprice;
+	std::cin >> sprice;
+	{
+	    fstream fout; 
+	    fout.open("flightdetails.csv", ios::out | ios::app);
+	    fout << fl_number << ", "
+	         << fl_ori << ", "
+	         << fl_des << ", "
+	         << dtime << ", "
+	         << atime << ", "
+	         << total_seat << ", "
+	         << sprice 
+	         << "\n";
+	    fout.close();
+	    cout << "Flight added successfully"<<endl;
 	}
+}
+
+void Flight::deleteflight(){
+	fstream fin, fout;
+	fin.open("flightdetails.csv", ios::in);
+	fout.open("newfile.csv", ios::out);
+	int number_fl;
+	std::cout << "Enter the flight number of the record to be deleted: "<<endl;
+	cin >> number_fl;
+	int count=0;
+	while(!fin.eof()){
+		if(number_fl != fl_number){
+			fout << fl_number << ", "
+	         << fl_ori << ", "
+	         << fl_des << ", "
+	         << dtime << ", "
+	         << atime << ", "
+	         << total_seat << ", "
+	         << sprice 
+	         << "\n";
+			}
+		else{
+			count = 1;
+			continue;
+		}
+		if(fin.eof())
+			break;
+	}
+	if(count == 1){
+		cout << "Flight deleted from record"<< endl;
+	}
+	else{
+		cout << "Flight Not found"<< endl;
+	}
+	fin.close();
+	fout.close();
+
+	remove("flightdetails.csv");
+
+	rename("newfile.csv", "flightdetails.csv");
+}
 
 void admin(){
 	Flight fly;

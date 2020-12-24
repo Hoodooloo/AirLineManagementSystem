@@ -15,9 +15,7 @@ class Flight{
 	int sprice;
 public:
 	void getdata();
-	void display(){
-		printf("Hello\n");
-	};
+	void display();
 	void deleteflight();
 };
 
@@ -63,40 +61,23 @@ void Flight::deleteflight(){
 	fstream fin, fout;
 	fin.open("flightdetails.csv", ios::in);
 	fout.open("newfile.csv", ios::out);
-	int number_fl;
 	std::cout << "Enter the flight number of the record to be deleted: "<<endl;
+	int number_fl;
 	cin >> number_fl;
-	int count=0;
-	while(!fin.eof()){
-		if(number_fl != fl_number){
-			fout << fl_number << ", "
-	         << fl_ori << ", "
-	         << fl_des << ", "
-	         << dtime << ", "
-	         << atime << ", "
-	         << total_seat << ", "
-	         << sprice 
-	         << "\n";
-			}
-		else{
-			count = 1;
-			continue;
-		}
-		if(fin.eof())
-			break;
-	}
-	if(count == 1){
-		cout << "Flight deleted from record"<< endl;
-	}
-	else{
-		cout << "Flight Not found"<< endl;
-	}
 	fin.close();
 	fout.close();
 
 	remove("flightdetails.csv");
 
 	rename("newfile.csv", "flightdetails.csv");
+}
+
+void Flight::display(){
+	fstream fin;
+	string data,line;
+	fin.open("flightdetails.csv",ios::in);
+	while(getline(fin,line))
+		cout << line << endl;
 }
 
 void admin(){

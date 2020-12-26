@@ -61,14 +61,49 @@ void Flight::deleteflight(){
 	fstream fin, fout;
 	fin.open("flightdetails.csv", ios::in);
 	fout.open("newfile.csv", ios::out);
-	std::cout << "Enter the flight number of the record to be deleted: "<<endl;
-	int number_fl;
-	cin >> number_fl;
+	int fl_n, fl_n1, count = 0;
+	string line, word;
+	std::vector<string> row;
+
+	cout << "Enter the flight number to delete: ";
+	cin >> fl_n;
+
+	while(!fin.eof()){
+		row.clear();
+		getline(fin,line);
+		stringstream s(line);
+
+		while(getline(s,word,',')){
+			row.push_back(word);
+		}
+
+		int row_size = row.size();
+		fl_n1 = stoi(row[0]);
+
+		if(fl_n1 != fl_n){
+			if(!fin.eof()){
+				for(int i=0;i<row_size-1;i++){
+					fout << row[i] << ",";
+				}
+				fout << row[row_size-1] << "\n";
+			}
+		}
+		else{
+			count = 1;
+		}
+		if(fin.eof())
+			break;
+	}
+	if(count == 1){
+		cout << "Record not found " << endl;
+	}
+	else{
+		cout << "Record found and Deleted " << endl;
+	}
 	fin.close();
 	fout.close();
 
 	remove("flightdetails.csv");
-
 	rename("newfile.csv", "flightdetails.csv");
 }
 

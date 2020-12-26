@@ -20,25 +20,25 @@ public:
 };
 
 void Flight::getdata(){
-	printf("Enter the Flight Number: \n");
+	printf("\n\t\t\tEnter the Flight Number: ");
 	int fl_number;
 	std::cin >> fl_number;
-	printf("Enter the flight origin: \n");
+	printf("\t\t\tEnter the flight origin: ");
 	std::string fl_ori;
 	std::cin >> fl_ori;
-	printf("Enter the flight destination: \n");
+	printf("\t\t\tEnter the flight destination: ");
 	std::string fl_des;
 	std::cin >> fl_des;
-	printf("Enter the flight departure time: \n");
+	printf("\t\t\tEnter the flight departure time: ");
 	int dtime;
 	std::cin >> dtime;
-	printf("Enter the flight arrival time: \n");
+	printf("\t\t\tEnter the flight arrival time: ");
 	int atime;
 	std::cin >> atime;
-	printf("Enter the total seats: \n");
+	printf("\t\t\tEnter the total seats: ");
 	int total_seat;
 	std::cin >> total_seat;
-	printf("Enter the price of each seat: \n");
+	printf("\t\t\tEnter the price of each seat: ");
 	int sprice;
 	std::cin >> sprice;
 	{
@@ -53,7 +53,9 @@ void Flight::getdata(){
 	         << sprice 
 	         << "\n";
 	    fout.close();
-	    cout << "Flight added successfully"<<endl;
+	    cout << "\t\t\tFlight added successfully"<<endl;
+	    std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
+	    std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
 	}
 }
 
@@ -65,7 +67,7 @@ void Flight::deleteflight(){
 	string line, word;
 	std::vector<string> row;
 
-	cout << "Enter the flight number to delete: ";
+	cout << "\n\t\t\tEnter the flight number to delete: ";
 	cin >> fl_n;
 
 	while(!fin.eof()){
@@ -95,10 +97,14 @@ void Flight::deleteflight(){
 			break;
 	}
 	if(count == 1){
-		cout << "Record not found " << endl;
+		cout << "\t\t\tRecord found and Deleted " << endl;
+		std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
+		std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
 	}
 	else{
-		cout << "Record found and Deleted " << endl;
+		cout << "\t\t\tRecord not found  " << endl;
+		std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
+		std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
 	}
 	fin.close();
 	fout.close();
@@ -111,19 +117,26 @@ void Flight::display(){
 	fstream fin;
 	string data,line;
 	fin.open("flightdetails.csv",ios::in);
+	printf("\n");
 	while(getline(fin,line))
-		cout << line << endl;
+		cout << "\t\t\t" << line << endl;
+	fin.close();
+	std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
+	std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
 }
 
 void admin(){
 	Flight fly;
 	int n;
-	std::cout << "_____________________________________" <<std::endl;
-	printf("Enter 1 to add flights.\n");
-	printf("Enter 2 to delete flights.\n");
-	printf("Enter 3 to get flights details.\n");
-	printf("Enter 4 to Exit.\n");
-	while(std::cin >> n){
+	std::cout << "_____________________________________________________________________________________________________________________________________________\n" <<std::endl;
+	while(1){
+		printf("\t\t\tEnter 1 to add flights.\n");
+		printf("\t\t\tEnter 2 to delete flights.\n");
+		printf("\t\t\tEnter 3 to get flights details.\n");
+		printf("\t\t\tEnter 4 to Exit.\n\t\t");
+		std::cin >> n;
+		std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
+		std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
 		if (n == 1)
 		{
 			fly.getdata();
@@ -138,7 +151,7 @@ void admin(){
 			break;
 		}
 		else{
-			printf("Invalid Input. Try again.\n");
+			printf("\tInvalid Input. Try again.\n");
 		}
 	}
 }

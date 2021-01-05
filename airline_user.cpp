@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "admin.h"
-// #include "passenger.h"
+#include "passenger.h"
 using namespace std;
 
 int main(){
@@ -21,15 +21,11 @@ int main(){
 			cin >> pass;
 		}
 		admin();
-		
-	}
-    
-	// if (emp_user == 1)
-	// {
-	// 	printf("ahsdf");
-	// 	// passenger();
 
-	// }
-	
-	
+	}
+
+	if (emp_user == 1)
+	{
+		passenger();
+	}
 }

@@ -17,6 +17,7 @@ public:
 	void getdata();
 	void display();
 	void deleteflight();
+	void p_display();
 };
 
 void Flight::getdata(){
@@ -42,7 +43,7 @@ void Flight::getdata(){
 	int sprice;
 	std::cin >> sprice;
 	{
-	    fstream fout; 
+	    fstream fout;
 	    fout.open("flightdetails.csv", ios::out | ios::app);
 	    fout << fl_number << ", "
 	         << fl_ori << ", "
@@ -50,7 +51,7 @@ void Flight::getdata(){
 	         << dtime << ", "
 	         << atime << ", "
 	         << total_seat << ", "
-	         << sprice 
+	         << sprice
 	         << "\n";
 	    fout.close();
 	    cout << "\t\t\tFlight added successfully"<<endl;
@@ -125,6 +126,18 @@ void Flight::display(){
 	std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
 }
 
+void Flight::p_display(){
+	fstream fin;
+	string data,line;
+	fin.open("passengerdetails.csv",ios::in);
+	printf("\n");
+	while(getline(fin,line))
+		cout << "\t\t\t" << line << endl;
+	fin.close();
+	std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
+	std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
+}
+
 void admin(){
 	Flight fly;
 	int n;
@@ -133,7 +146,8 @@ void admin(){
 		printf("\t\t\tEnter 1 to add flights.\n");
 		printf("\t\t\tEnter 2 to delete flights.\n");
 		printf("\t\t\tEnter 3 to get flights details.\n");
-		printf("\t\t\tEnter 4 to Exit.\n\t\t");
+		printf("\t\t\tEnter 4 to get passengers details.\n");
+		printf("\t\t\tEnter 5 to Exit.\n\t\t");
 		std::cin >> n;
 		std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
 		std::cout << "_____________________________________________________________________________________________________________________________________________" <<std::endl;
@@ -148,6 +162,9 @@ void admin(){
 			fly.display();
 		}
 		else if(n == 4){
+			fly.p_display();
+		}
+		else if(n == 5){
 			break;
 		}
 		else{
